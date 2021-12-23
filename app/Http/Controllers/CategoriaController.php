@@ -20,13 +20,17 @@ class CategoriaController extends Controller
   
     public function create()
     {
-        return 'create';
+        return view('categorias.create');
     }
 
   
     public function store(Request $request)
     {
-        return 'show';
+        $categoria = new Categoria();
+        $categoria->codigo= $request->codigo;
+        $categoria->nombre= $request->nombre;
+        $categoria->save();
+        return redirect()->route('categorias.index');
     }
 
    

@@ -15,6 +15,7 @@
                 <td>{{$categoria->nombre}}</td>
                 <td>{{$categoria->created_at}}</td>
                 <td>
+                    <a href="{{ route('categorias.show', $categoria->id) }}">+</a>
                     <a href="{{ route('categorias.edit', $categoria->id) }}">Editar</a>
                     <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST">
                         @method('DELETE')

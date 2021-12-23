@@ -42,13 +42,21 @@ class CategoriaController extends Controller
  
     public function edit($id)
     {
-        return 'edit';
+        $categoria = Categoria::find($id);
+        $data = [
+            'categoria'=>$categoria,
+        ];
+        return view('categorias.edit',$data);
     }
 
 
     public function update(Request $request, $id)
     {
-        return 'update';
+        $categoria = Categoria::find($id);
+        $categoria->codigo = $request->codigo;
+        $categoria->nombre = $request->nombre;
+        $categoria->save();
+        return redirect()->route('categorias.index');
     }
 
 

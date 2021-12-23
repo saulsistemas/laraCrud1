@@ -1,12 +1,17 @@
-<a href="{{ route('categorias.create') }}">Crear</a>
-<div>
+@extends('template.plantilla')
+@section('contenido') 
+<div class="d-md-flex justify-content-md-end">
     <form action="{{ route('categorias.index') }}" method="GET">
-        <input type="text" name="busqueda">
-        <input type="submit" value="enviar">
+        <div class="btn-group">
+            <input type="text" name="busqueda" class="form-control">
+            <input type="submit" value="enviar" class="btn btn-primary">
+        </div>
     </form>
     
 </div>
-<table border="1">
+<hr>
+<a href="{{ route('categorias.create') }}" class=" btn btn-primary ">Crear</a>
+<table class="table">
     <thead>
         <th>Id</th>
         <th>Codigo</th>
@@ -22,13 +27,15 @@
                 <td>{{$categoria->nombre}}</td>
                 <td>{{$categoria->created_at}}</td>
                 <td>
-                    <a href="{{ route('categorias.show', $categoria->id) }}">+</a>
-                    <a href="{{ route('categorias.edit', $categoria->id) }}">Editar</a>
-                    <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <input type="submit" value="Eliminar">
-                    </form>
+                    <div class="btn-group">
+                        <a href="{{ route('categorias.show', $categoria->id) }}" class=" btn btn-primary ">+</a>
+                        <a href="{{ route('categorias.edit', $categoria->id) }}" class=" btn btn-warning ">Editar</a>
+                        <form action="{{ route('categorias.destroy', $categoria->id) }}"  method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <input type="submit" value="Eliminar" class=" btn btn-danger ">
+                        </form>
+                    </div>    
                 </td>
             </tr>
         @endforeach
@@ -41,3 +48,4 @@
         </tr>
     </tfoot>
 </table>
+@endsection   

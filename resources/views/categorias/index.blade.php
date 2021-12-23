@@ -1,4 +1,11 @@
 <a href="{{ route('categorias.create') }}">Crear</a>
+<div>
+    <form action="{{ route('categorias.index') }}" method="GET">
+        <input type="text" name="busqueda">
+        <input type="submit" value="enviar">
+    </form>
+    
+</div>
 <table border="1">
     <thead>
         <th>Id</th>
@@ -25,6 +32,12 @@
                 </td>
             </tr>
         @endforeach
-       
     </tbody>
+    <tfoot>
+        <tr>
+            {{-- <td colspan="5">{{$categorias->links()}}</td> --}}
+            <td colspan="5">{{ $categorias->appends(['busqueda' => $busqueda])->links() }}</td>
+            {{-- {!! $categorias->appends(["texto" => $texto]) !!} --}}
+        </tr>
+    </tfoot>
 </table>

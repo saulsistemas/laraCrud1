@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 class CategoriaController extends Controller
 {
    
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::all();
+        $busqueda=trim($request->busqueda);
+        $categorias = Categoria::where('nombre','LIKE','%'.$busqueda.'%')
+                    ->latest('id')
+                    ->paginate(2);
         $data=[
             'categorias'=>$categorias,
+            'busqueda'=>$busqueda,
         ];
         return view('categorias.index',$data);
     }
